@@ -1,6 +1,3 @@
-#needs to be child of recipient
-# Attributes: real_name, status_text, status_emoji
-# methods: details, self.list_all
 require 'httparty'
 require_relative 'recipient'
 
@@ -20,14 +17,9 @@ class User < Recipient
 
   end
 
-  class SlackError < Exception; end
-
   def self.list_all
     users = []
-    response = self.get('https://slack.com/api/users.list', {token: ENV['SLACK_TOKEN']})
-    if response.body.string["ok"] != true || response["ok"] == false
-      raise SlackError, "there is a problem: #{response['error']}"
-    end
+    response = self.get(USERS_LIST_URL, {token: ENV['SLACK_TOKEN']})
 
     response["members"].each do |user|
       new_user = User.new(

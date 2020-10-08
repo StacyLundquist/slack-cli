@@ -1,12 +1,7 @@
-require 'httparty'
-require 'dotenv'
-require 'table_print'
-require_relative 'slack'
+
 require_relative 'channel'
 require_relative 'user'
-require_relative 'recipient'
 
-Dotenv.load
 
 
 class Workspace

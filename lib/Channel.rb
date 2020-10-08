@@ -1,16 +1,8 @@
-require 'httparty'
-require 'dotenv'
-require 'table_print'
-require_relative 'workspace'
-require_relative 'slack'
-require_relative 'user'
 require_relative 'recipient'
 
-Dotenv.load
 # needs to be child of recipient
 # attributes: topic, member_count
 # methods: details, self.list_all
-
 
 class Channel < Recipient
   attr_reader :topic, :member_count
@@ -23,13 +15,14 @@ class Channel < Recipient
 
   def details
     #prints info for currently selected channel, if not, should let user know and return to main command prompt
+    detailed_info = "Slack_id: #{slack_id}, Name: #{@name}, Member Count: #{@member_count}, Topic: #{@topic}"
+    return detailed_info
   end
 
   class SlackError < Exception; end
 
   def self.list_all
-
-    response = self.get('https://slack.com/api/conversations.list', {token: ENV['SLACK_TOKEN']})
+    response = get(CHANNEL_LIST, {token: ENV['SLACK_TOKEN']})
 
     channels = []
     response["channels"].each do |channel|
@@ -40,11 +33,9 @@ class Channel < Recipient
           member_count: channel["num_members"]
       )
       channels << new_channel
-
     end
     return channels
   end
-
 end
 
 

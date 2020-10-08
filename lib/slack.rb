@@ -2,9 +2,10 @@
 require_relative 'Workspace'
 require 'terminal-table'
 require 'table_print'
-
+require 'dotenv'
 
 def main
+  Dotenv.load
   puts 'Welcome to the Ada Slack CLI!'
   workspace = Workspace.new
 
@@ -19,7 +20,7 @@ def main
     puts options
     input = gets.chomp.downcase
 
-    case input.downcase
+    case options_list
     when '1', 'list users'
       tp workspace.users
     when '2', 'list channels'
