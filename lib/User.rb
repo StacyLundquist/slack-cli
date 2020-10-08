@@ -20,11 +20,13 @@ class User < Recipient
 
   end
 
+  class SlackError < Exception; end
+
   def self.list_all
     users = []
-    response = Recipient.get('https://slack.com/api/users.list', {token: ENV['SLACK_TOKEN']})
-    if response.code != 200 || response["ok"] == false
-      raise APIError, "there is a problem: #{response['error']}"
+    response = self.get('https://slack.com/api/users.list', {token: ENV['SLACK_TOKEN']})
+    if response.body.string["ok"] != true || response["ok"] == false
+      raise SlackError, "there is a problem: #{response['error']}"
     end
 
     response["members"].each do |user|

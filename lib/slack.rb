@@ -8,8 +8,8 @@ def main
   puts 'Welcome to the Ada Slack CLI!'
   workspace = Workspace.new
 
-  tp.set Workspace.user, :name, :real_name, :slack_id
-  tp.set Workspace.channel, :name, :topic, :member_count, :slack_id
+  tp.set workspace.users, :name, :real_name, :slack_id
+  tp.set workspace.channels, :name, :topic, :member_count, :slack_id
 
   options_table = [[1, 'List Users'], [2, 'List Channels'], [3, 'Select User'],
                    [4, 'Select Channel'], [5, 'Details'], [6, 'Send Message'], [7, 'QUIT']]
@@ -21,19 +21,19 @@ def main
 
     case input.downcase
     when '1', 'list users'
-      tp Workspace.users
+      tp workspace.users
     when '2', 'list channels'
-      tp Workspace.channels
+      tp workspace.channels
     when '3', 'select user'
       puts 'Please enter a username or SlackID'
       user = gets.chomp
-      if Workspace.select_channel(user).nil?
+      if workspace.select_channel(user).nil?
         puts "We don't have #{user} as a user, try again?"
       end
     when '4', 'select channel'
       puts 'Please enter a channel name or SlackID'
       channel = gets.chomp
-      if Workspace.select_channel(channel).nil?
+      if workspace.select_channel(channel).nil?
         puts "We don't have a #{channel} channel, try again?"
       end
     when '5', 'details'

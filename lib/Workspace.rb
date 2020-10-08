@@ -19,8 +19,8 @@ class Workspace
   attr_reader :users, :channels, :selected
 
   def initialize
-    # @users = user.list_all
-    # @channels = channel.list_all
+    @users = User.list_all
+    @channels = Channel.list_all
   end
 
   def select_channel()

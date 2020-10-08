@@ -25,9 +25,11 @@ class Channel < Recipient
     #prints info for currently selected channel, if not, should let user know and return to main command prompt
   end
 
+  class SlackError < Exception; end
+
   def self.list_all
 
-    response = Recipient.get('https://slack.com/api/conversations.list', {token: ENV['USER_SLACK_TOKEN']})
+    response = self.get('https://slack.com/api/conversations.list', {token: ENV['SLACK_TOKEN']})
 
     channels = []
     response["channels"].each do |channel|

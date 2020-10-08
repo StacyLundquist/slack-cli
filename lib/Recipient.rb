@@ -5,7 +5,6 @@ require_relative 'channel'
 require_relative 'slack'
 
 Dotenv.load
-token = ENV['SLACK_TOKEN']
 # needs to be parent of user and channel
 # attributes: slack_id, name
 # methods:
