@@ -1,0 +1,3 @@
+class SlackError < Exception
+
+end
