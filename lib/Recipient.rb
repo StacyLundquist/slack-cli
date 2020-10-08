@@ -23,13 +23,14 @@ class Recipient
 
   def send_message(message) end
 
+  class SlackError < Exception; end
 
   def self.get(url, params)
 
     response = HTTParty.get(url, query: params)
 
     if response.code != 200
-      raise StandardError, "API call failed with code #{response.code} and reason #{response['reason']}"
+      raise SlackError, "API call failed with code #{response.code} and reason #{response['reason']}"
     end
 
     return response

@@ -1,12 +1,15 @@
 #!/usr/bin/env ruby
 require_relative 'Workspace'
 require 'terminal-table'
+require 'table_print'
 
 
 def main
   puts 'Welcome to the Ada Slack CLI!'
   workspace = Workspace.new
 
+  tp.set Workspace.user, :name, :real_name, :slack_id
+  tp.set Workspace.channel, :name, :topic, :member_count, :slack_id
 
   options_table = [[1, 'List Users'], [2, 'List Channels'], [3, 'Select User'],
                    [4, 'Select Channel'], [5, 'Details'], [6, 'Send Message'], [7, 'QUIT']]
@@ -18,9 +21,9 @@ def main
 
     case input.downcase
     when '1', 'list users'
-      tp Workspace.users # should include username, realname, and slackID
+      tp Workspace.users
     when '2', 'list channels'
-      tp Workspace.channels # should include channelname, topic, member count, and slackID
+      tp Workspace.channels
     when '3', 'select user'
       puts 'Please enter a username or SlackID'
       user = gets.chomp

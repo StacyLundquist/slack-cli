@@ -27,7 +27,7 @@ class Channel < Recipient
 
   def self.list_all
 
-    response = Recipient.get('https://slack.com/api/conversations.list', {token: ENV['SLACK_TOKEN']})
+    response = Recipient.get('https://slack.com/api/conversations.list', {token: ENV['USER_SLACK_TOKEN']})
 
     channels = []
     response["channels"].each do |channel|
