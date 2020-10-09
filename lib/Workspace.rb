@@ -32,20 +32,20 @@ class Workspace
 
 
   def show_details
-    # will call the details method of the previously selected user or channel
     if @selected.nil?
-      puts "nothing selected"
+      puts 'Select a user or channel first...'
     else
       return @selected.details
-      endend
-
-      def send_message
-        if @selected.nil?
-          puts "nothing selected"
-        else
-          return send_message(message)
-        end
-      end
     end
   end
+
+  def send_message(message)
+    if @selected.nil?
+      puts 'Select a user or channel first...'
+    else
+      return send_message(message)
+    end
+  end
+end
+
 

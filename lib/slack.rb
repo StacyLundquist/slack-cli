@@ -44,9 +44,9 @@ def main
       puts workspace.show_details
 
     when '6', 'send message'
-      puts "please type your message: "
+      puts 'What is your message: '
       unless workspace.send_message(gets.chomp).empty?
-        puts "Message sent!"
+        puts 'Message sent!'
       end
     end
   end
