@@ -1,6 +1,5 @@
-class SlackError < StandardError; end
 require 'httparty'
-
+class SlackError < StandardError; end
 
 class Recipient
   CHANNEL_LIST = 'https://slack.com/api/conversations.list'
@@ -19,8 +18,12 @@ class Recipient
     response = HTTParty.post(MESSAGE_LIST, body: {
       token: ENV['SLACK_TOKEN'],
       text: message,
-      channel: @session
+      channel: @slack_id
   })
+    unless response['ok'] == true
+      raise SlackError, "API call failed with reason #{response['error']}"
+    end
+    return true
   end
 
 

@@ -23,28 +23,34 @@ def main
     case options_list
     when '1', 'list users'
       tp workspace.users
+
     when '2', 'list channels'
       tp workspace.channels
+
     when '3', 'select user'
       puts 'Please enter a username or SlackID'
-      user = gets.chomp
-      if workspace.select_channel(user).nil?
-        puts "We don't have #{user} as a user, try again?"
+      unless workspace.select_user(gets.chomp).empty?
+        puts "enter details to see information about #{id}"
+        puts "enter send message to send a message to #{id}"
       end
+
     when '4', 'select channel'
       puts 'Please enter a channel name or SlackID'
-      channel = gets.chomp
-      if workspace.select_channel(channel).nil?
-        puts "We don't have a #{channel} channel, try again?"
+      unless workspace.select_channel(gets.chomp).empty?
+        puts "enter details to see information about #{id}"
+        puts "enter send message to send a message to #{id}"
       end
     when '5', 'details'
-
+      puts workspace.show_details
 
     when '6', 'send message'
-      
+      puts "please type your message: "
+      unless workspace.send_message(gets.chomp).empty?
+        puts "Message sent!"
+      end
     end
   end
-  
+
 
   puts 'Thank you for using the Ada Slack CLI'
 end
