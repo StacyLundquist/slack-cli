@@ -29,8 +29,8 @@ def main
       if workspace.select_user(gets.chomp).nil?
         puts "We don't have #{wanted_user} as a user, try again?"
       else
-        puts "enter details to see information about #{id}"
-        puts "enter send message to send a message to #{id}"
+        puts "enter details to see information about #{wanted_user}"
+        puts "enter send message to send a message to #{wanted_user}"
       end
 
     when '4', 'select channel'
@@ -39,8 +39,8 @@ def main
       if workspace.select_channel(wanted_channel).nil?
         puts "We don't have #{wanted_channel} as a channel, try again?"
       else
-        puts "enter details to see information about #{id}"
-        puts "enter send message to send a message to #{id}"
+        puts "enter details to see information about #{wanted_channel}"
+        puts "enter send message to send a message to #{wanted_channel}"
       end
 
     when '5', 'details'
