@@ -15,7 +15,7 @@ class Channel < Recipient
   end
 
   def self.list_all
-    response = get(CHANNEL_LIST, {token: ENV['SLACK_TOKEN']})
+    response = get(CHANNEL_LIST_URL, {token: ENV['SLACK_TOKEN']})
     channels = []
     response['channels'].each do |channel|
       new_channel = new(

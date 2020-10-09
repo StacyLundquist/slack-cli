@@ -18,7 +18,7 @@ class User < Recipient
 
   def self.list_all
     users = []
-    response = get(USERS_LIST_URL, {token: ENV['SLACK_TOKEN']})
+    response = get(USER_LIST_URL, {token: ENV['SLACK_TOKEN']})
     response['members'].each do |user|
       new_user = new(
         name: user['name'],
